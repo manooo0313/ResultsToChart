@@ -1,0 +1,17 @@
+{
+  "name": "resultstochart",
+  "version": "1.0.0",
+  "description": "This app is transforming the Short Track skaters best results to a chart",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Mano Loth",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14"
+  }
+}

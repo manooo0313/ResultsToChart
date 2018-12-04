@@ -1,0 +1,32 @@
+<% include partials/header%>
+
+
+ <div class="container">
+     <header class="jumbotron">
+        <h1>List of all Skaters</h1>
+        <p>Chose a Skater to see his/her results transformed into Chart</p>
+        <p>
+          <a class="btn btn-primary btn-lg" href="skaters/new">Add New Skater</a>
+        </p> 
+     </header>
+     
+     <div class="row" style="display:flex; flex-wrap: wrap;">
+        <% skaters.forEach(function(skater){ %>
+            <div class=" col-lg-12 col-md-12 col-sm-12 float-left">
+              <div>
+                <h4 class="d-inline"><%= skater.name %></h4>
+                <a class="fas fa-info-circle" href="#"></a>
+              </div>
+              <div>
+                  <img   src="<%= skater.image %>" class="img-responsive img-rounded" style="max-height: 50px; max-width: 50px;">
+                  <a class="btn btn-primary btn-sm" href="#">
+                    Show <%= skater.name %>'s Results in Chart
+                  </a>
+                  <hr>
+              </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<% include partials/footer%>
