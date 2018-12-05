@@ -2,7 +2,7 @@ var express         = require("express");
 var app             = express();
 var mongoose        = require("mongoose");
 var bodyParser      = require("body-parser");
-//var Skater          = require("./models/skater");
+var Skater          = require("./models/skater");
 //var Competition     = require("./models/competition");
 //var DistanceResult  = require("./models/distanceResult"); 
 
@@ -13,20 +13,6 @@ mongoose.connect("mongodb://localhost:27017/results_to_chart", { useNewUrlParser
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
-var skaterSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    image: String,
-    dateOfBirth: {type: String, required: true},
-    competitions: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref : "Competition"
-        }
-        ]
-});
-
-var Skater = mongoose.model("Skater", skaterSchema);
 
 
 //Skater.create(
@@ -59,18 +45,18 @@ app.get("/", function(req, res){
    res.render("landing");
 });
 
-// Show all the Skaters
+// INDEX Route - Show all the Skaters
 app.get("/skaters", function(req, res){
         Skater.find({}, function(err, allSkaters){
             if(err){
                 console.log(err);
             } else {
-                res.render("skaters", {skaters:allSkaters});
+                res.render("index", {skaters:allSkaters});
             } 
         });
 });
 
-//Add a New Skater
+//CREATE Route - Add a New Skater
 app.post("/skaters", function(req, res){
    //get data from the form and add to skaters array
    var name = req.body.name;
@@ -81,7 +67,7 @@ app.post("/skaters", function(req, res){
    Skater.create(newSkater, function(err, newlyCreatedSkater){
        if(err){
            console.log(err);
-           
+           res.redirect("/skaters/new");
        } else {
             //redirect to the skaters page
             res.redirect("/skaters");
@@ -89,11 +75,23 @@ app.post("/skaters", function(req, res){
    });
 });
 
-//Render the new skater form
+//NEW Route - Show the form to crate new skater
 app.get("/skaters/new", function(req, res) {
    res.render("new");
 });
 
+//SHOW Route - Show one particular skater and his/her chart 
+app.get("/skaters/:id", function(req,res){
+    //find the skater with the provided ID
+    Skater.findById(req.params.id, function(err, foundSkater){
+       if(err){
+           console.log(err);
+       } else {
+            //render the show template with that skater
+            res.render("show", {skater: foundSkater});
+       }
+    });
+});
 
 
 
