@@ -3,7 +3,7 @@ var app             = express();
 var mongoose        = require("mongoose");
 var bodyParser      = require("body-parser");
 var Skater          = require("./models/skater");
-//var Competition     = require("./models/competition");
+var Competition     = require("./models/competition");
 //var DistanceResult  = require("./models/distanceResult"); 
 
 
@@ -89,9 +89,57 @@ app.get("/skaters/:id", function(req,res){
        } else {
             //render the show template with that skater
             res.render("show", {skater: foundSkater});
+            console.log(foundSkater);
        }
     });
 });
+
+// COMPETITION ROUTES
+
+//NEW route - render the NewCompetition template
+
+app.get("/skaters/:id/competitions/new", function(req, res){
+        Skater.findById(req.params.id, function(err, foundSkater){
+           if(err){
+               console.log(err);
+           } else {
+                res.render("newCompetition", {skater: foundSkater});
+           }
+    });
+});
+
+// CREATE route - Create a new competition
+
+app.post("/skaters/:id/competitions", function(req, res){
+   //lookup skater using ID
+   Skater.findById(req.params.id, function(err, skater){
+       if(err){
+           console.log(err);
+           res.redirect("/skaters");
+       } else {
+        Competition.create(req.body.competition, function(err, competition){
+           if(err){
+               console.log(err);
+           } else {
+               //to be continue from here this problem is not solved
+                //competition.skater = req.user._id;
+                //competition.author.username = req.user.username;
+                //save comment
+                //competition.save();
+                skater.competitions.push(competition);
+                skater.save();
+                console.log(competition);
+                res.redirect("/skaters/" + skater._id);
+           }
+        });
+       }
+   });
+   //create new competition
+   //connect new competition to skater
+   //redirect skater/:id show page
+});
+
+
 
 
 

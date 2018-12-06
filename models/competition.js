@@ -3,13 +3,8 @@ var mongoose = require("mongoose");
 
 var competitionSchema = new mongoose.Schema({
     name: {type: String, required: true},
-    date: {type: String, required: true},
-    distanceResult: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "DistanceResult"
-        }
-        ],
+    date: { type: Date, default: Date.now, required: true},
+    location: {type: String, required: true},
     skater: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -19,3 +14,5 @@ var competitionSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Competition", competitionSchema);
+
+

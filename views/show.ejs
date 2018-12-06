@@ -1,13 +1,47 @@
 <% include partials/header %>
 <div class="container">
         <h1> <%= skater.name %></h1>
-        <img style="max-height: 150px; max-width: 150px;" src="<%= skater.image%>">
-        <p>Date of Birth: <%= skater.dateOfBirth %></p>
-        <p>Some other data will go here later</p>
-        <p>Some other data will go here later</p>
-        <p>Some other data will go here later</p>
+        <div class="row">
+            <div class="span4">
+                <img class="img-responsive" style="max-height: 150px; max-width: 150px;" src="<%= skater.image%>">
+            </div>
+            <div class="span8">
+                <div class="container">
+                    <p>Date of Birth: <%= skater.dateOfBirth %></p>
+                
+                    <div>
+                        <% skater.competitions.forEach(function(competition){ %>
+                                <p>
+                                    <strong>
+                                        <%= competition.name %>
+                                    </strong>
+                                </p>    
+                                <p>
+                                    <%= competition.date %>
+                                </p>    
+                                <p>
+                                    <%= competition.location %>
+                                </p>
+                        <% }); %>
+                    </div>
+                    <p>Some other data will go here later</p>
+                    <p>Some other data will go here later</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn-group">
+                <a class="btn btn-xs btn-primary" href="/skaters/<%= skater._id %>/competitions/new">Add a New Competition</a>
+                <a class= "btn btn-xs btn-warning" href="/skaters/<%= skater._id %>/edit">Edit Skater </a>
+                <form class="d-inline" action="/skaters/<%= skater._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-xs btn-danger">Delete Skater</button>
+                </form>
+        </div>
+        
+        
+    <hr>
 </div>
-<hr>
+
 <div class="container">
     <h3>The Chart goes here</h3>
     <img src="https://www.excel-easy.com/examples/images/line-chart/line-chart.png">
