@@ -1,16 +1,17 @@
 <% include partials/header %>
 <div class="container">
         <h1> <%= skater.name %></h1>
-        <div class="row">
+        <div class="row" style="margin-top: 50px">
             <div class="span4">
-                <img class="img-responsive" style="max-height: 150px; max-width: 150px;" src="<%= skater.image%>">
-                 <p>Date of Birth: <%= skater.dateOfBirth %></p>
-                
+                <img class="img-responsive" style="max-height: 200px; max-width: 200px;" src="<%= skater.image%>">
+                    <p>Date of Birth: <%= skater.dateOfBirth %></p>
+                    <p>Some other data will go here later</p>
+                    <p>Some other data will go here later</p>
             </div>
             <div class="span8">
                 <div class="container">
-                   
                     <div>
+                        <h3>List of the Competitions:</h3>
                         <% skater.competitions.forEach(function(competition){ %>
                                 <p>
                                     <strong>
@@ -18,26 +19,27 @@
                                     </strong>
                                 </p>    
                                 <p>
-                                    <%= competition.date %>
-                                    <%= competition.location %>
+                                    Date: <%= competition.date %>
+                                </p>
+                                <p>
+                                    Location: <%= competition.location %>
                                 </p>    
+                            <a class="btn btn-sm btn-outline-primary" href="/skaters/<%= skater._id %>/competitions/new">Add New Results</a>
+                            <a class= "btn btn-sm btn-outline-warning" href="/skaters/<%= skater._id %>/edit">Edit Competition </a>
+                            <form class="d-inline" action="/skaters/<%= skater._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-outline-danger">Delete Competition</button>
+                            </form>
+                            <hr>
                         <% }); %>
                     </div>
-                    <p>Some other data will go here later</p>
-                    <p>Some other data will go here later</p>
                 </div>
             </div>
         </div>
-        
-        <div class="btn-group">
-                <a class="btn btn-xs btn-primary" href="/skaters/<%= skater._id %>/competitions/new">Add a New Competition</a>
-                <a class= "btn btn-xs btn-warning" href="/skaters/<%= skater._id %>/edit">Edit Skater </a>
+                <a class="btn btn-lg btn-primary" href="/skaters/<%= skater._id %>/competitions/new">Add New Competition</a>
+                <a class= "btn btn-lg btn-warning" href="/skaters/<%= skater._id %>/edit">Edit Skater </a>
                 <form class="d-inline" action="/skaters/<%= skater._id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-xs btn-danger">Delete Skater</button>
+                    <button class="btn btn-lg btn-danger">Delete Skater</button>
                 </form>
-        </div>
-        
-        
     <hr>
 </div>
 

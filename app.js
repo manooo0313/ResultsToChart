@@ -139,6 +139,11 @@ app.post("/skaters/:id/competitions", function(req, res){
 });
 
 
+//RESULTS ROUTES
+
+//NEW route - render the from to add new result to a paricular competition
+
+
 
 
 
