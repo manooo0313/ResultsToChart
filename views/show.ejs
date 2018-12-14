@@ -4,11 +4,12 @@
         <div class="row">
             <div class="span4">
                 <img class="img-responsive" style="max-height: 150px; max-width: 150px;" src="<%= skater.image%>">
+                 <p>Date of Birth: <%= skater.dateOfBirth %></p>
+                
             </div>
             <div class="span8">
                 <div class="container">
-                    <p>Date of Birth: <%= skater.dateOfBirth %></p>
-                
+                   
                     <div>
                         <% skater.competitions.forEach(function(competition){ %>
                                 <p>
@@ -18,10 +19,8 @@
                                 </p>    
                                 <p>
                                     <%= competition.date %>
-                                </p>    
-                                <p>
                                     <%= competition.location %>
-                                </p>
+                                </p>    
                         <% }); %>
                     </div>
                     <p>Some other data will go here later</p>

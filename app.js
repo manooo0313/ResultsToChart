@@ -83,13 +83,13 @@ app.get("/skaters/new", function(req, res) {
 //SHOW Route - Show one particular skater and his/her chart 
 app.get("/skaters/:id", function(req,res){
     //find the skater with the provided ID
-    Skater.findById(req.params.id, function(err, foundSkater){
+    Skater.findById(req.params.id).populate("competitions").exec(function(err, foundSkater){
        if(err){
            console.log(err);
        } else {
             //render the show template with that skater
             res.render("show", {skater: foundSkater});
-            console.log(foundSkater);
+            //console.log(foundSkater);
        }
     });
 });
@@ -121,14 +121,13 @@ app.post("/skaters/:id/competitions", function(req, res){
            if(err){
                console.log(err);
            } else {
-               //to be continue from here this problem is not solved
-                //competition.skater = req.user._id;
-                //competition.author.username = req.user.username;
-                //save comment
-                //competition.save();
+                competition.skater = req.params.id;
+                //save competition
+                competition.save();
                 skater.competitions.push(competition);
                 skater.save();
-                console.log(competition);
+                //console.log(competition);
+                //console.log(skater);
                 res.redirect("/skaters/" + skater._id);
            }
         });
