@@ -11,6 +11,8 @@ var Competition     = require("./models/competition");
 
 //mongoose.connect("mongodb://localhost/results_to_chart");
 mongoose.connect("mongodb://localhost:27017/results_to_chart", { useNewUrlParser: true });
+mongoose.set('useFindAndModify', false);
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -90,7 +92,7 @@ app.put("/skaters/:id", function(req, res){
             console.log(err);
             res.redirect("/skaters");
         } else {
-            console.log(updatedSkater);
+            //console.log(updatedSkater);
             res.redirect("/skaters/" + req.params.id);
         }
     });
@@ -107,7 +109,9 @@ app.delete("/skaters/:id", function(req, res){
     });
 });
 
+//=======================
 // COMPETITION ROUTES
+//=======================
 
 //NEW route - render the NewCompetition template
 
@@ -122,7 +126,6 @@ app.get("/skaters/:id/competitions/new", function(req, res){
 });
 
 // CREATE route - Create a new competition
-
 app.post("/skaters/:id/competitions", function(req, res){
    //lookup skater using ID
    Skater.findById(req.params.id, function(err, skater){
@@ -139,7 +142,7 @@ app.post("/skaters/:id/competitions", function(req, res){
                 competition.save();
                 skater.competitions.push(competition);
                 skater.save();
-                //console.log(competition);
+                console.log(competition);
                 //console.log(skater);
                 res.redirect("/skaters/" + skater._id);
            }
@@ -149,6 +152,41 @@ app.post("/skaters/:id/competitions", function(req, res){
    //create new competition
    //connect new competition to skater
    //redirect skater/:id show page
+});
+
+//EDIT Route - Rendering the edit form with the existing competition data
+app.get("/skaters/:id/competitions/:competition_id/edit", function(req, res) {
+   Competition.findById(req.params.competition_id, function(err, foundCompetition) {
+      if(err){
+            res.redirect("/skaters");
+      } else {
+          console.log(foundCompetition);
+          console.log(foundCompetition.skater);
+        res.render("editCompetition", {competition: foundCompetition});          
+      }
+   }); 
+});
+
+//UPDATE Route - update a skater's Competition with the data from the editCompetition form
+app.put("/skaters/:id/competitions/:competition_id", function(req, res){
+   Competition.findByIdAndUpdate(req.params.competition_id, req.body.competition, function(err, updatedCompetition){
+       if(err){
+           res.redirect("back");
+       } else {
+           res.redirect("/skaters/" + req.params.id);
+       }
+   });
+});
+
+//DESTROY Route - delete the selected competition
+app.delete("/skaters/:id/competitions/:competition_id", function(req, res){
+   Competition.findByIdAndRemove(req.params.competition_id, function(err){
+      if(err){
+          res.redirect("back");
+      } else {
+          res.redirect("/skaters/" + req.params.id);
+      }
+   });
 });
 
 

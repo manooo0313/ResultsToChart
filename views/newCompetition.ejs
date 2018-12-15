@@ -1,10 +1,10 @@
 <% include partials/header %>
 
 
-<div class="container">
+<div class="container text-center">
     <div class="row">
         <h1 style="text-align: center">Add a Competition to <%= skater.name %>'s Competition Collection</h1>
-        <div style="width: 30%; margin: 25px auto;">
+        <div style="width: 30%; margin: 50px auto;">
             <form action="/skaters/<%= skater._id %>/competitions" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="text" name="competition[name]" placeholder="Competition Name">
