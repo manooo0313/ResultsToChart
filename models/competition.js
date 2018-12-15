@@ -10,6 +10,12 @@ var competitionSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref : "Skater"
         }
+        ],
+    results: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Results"
+        }
         ]
 });
 

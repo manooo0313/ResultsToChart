@@ -24,7 +24,7 @@
                                 <p>
                                     Location: <%= competition.location %>
                                 </p>    
-                            <a class="btn btn-sm btn-outline-primary" href="/skaters/<%= skater._id %>/competitions/new">Add New Results</a>
+                            <a class="btn btn-sm btn-outline-primary" href="/skaters/<%= skater._id %>/competitions/<%= competition._id %>/results/new">Add New Results</a>
                             <a class= "btn btn-sm btn-outline-warning" href="/skaters/<%= skater._id %>/competitions/<%= competition._id %>/edit">Edit Competition </a>
                             <form class="d-inline" action="/skaters/<%= skater._id %>/competitions/<%= competition._id %>?_method=DELETE" method="POST">
                                 <button class="btn btn-sm btn-outline-danger">Delete Competition</button>
