@@ -16,10 +16,38 @@
                     <input class="form-control" type="text" name="competition[location]" value="<%= competition.location %>">
                 </div>
                 <div class="form-group">
+                    Skill Race:
+                    <input class="form-control" type="text" name="competition[skillrace]" value="<%= competition.skillrace %>">
+                </div>
+                <div class="form-group">
+                    222m:
+                    <input class="form-control" type="text" name="competition[dist222m]" value="<%= competition.dist222m %>">
+                </div>
+                <div class="form-group">
+                    333m:
+                    <input class="form-control" type="text" name="competition[dist333m]" value="<%= competition.dist333m %>">
+                </div>
+                <div class="form-group">
+                    500m:
+                    <input class="form-control" type="text" name="competition[dist500m]" value="<%= competition.dist500m %>">
+                </div>
+                <div class="form-group">
+                    777m:
+                    <input class="form-control" type="text" name="competition[dist777m]" value="<%= competition.dist777m %>">
+                </div>
+                <div class="form-group">
+                    1000m:
+                    <input class="form-control" type="text" name="competition[dist1000m]" value="<%= competition.dist1000m %>">
+                </div>
+                <div class="form-group">
+                    1500m:
+                    <input class="form-control" type="text" name="competition[dist1500m]" value="<%= competition.dist1500m %>">
+                </div>
+                <div class="form-group">
                     <button type="submit" class="btn btn-lg btn-primary btn-block">Edit Competition</button>
                 </div>
             </form>
-            <a href="/skaters/<%= competition.skater %>" >Go Back</a>
+            <a class="btn btn-lg btn-secondary btn-block" href="/skaters/<%= competition.skater %>" >Go Back</a>
         </div>
     </div>
 </div>

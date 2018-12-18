@@ -5,7 +5,7 @@ var methodOverride  = require('method-override');
 var bodyParser      = require("body-parser");
 var Skater          = require("./models/skater");
 var Competition     = require("./models/competition");
-var DistanceResult  = require("./models/distanceResult"); 
+//var DistanceResult  = require("./models/distanceResult"); 
 
 
 
@@ -143,7 +143,7 @@ app.post("/skaters/:id/competitions", function(req, res){
                 skater.competitions.push(competition);
                 skater.save();
                 console.log(competition);
-                //console.log(skater);
+                console.log(skater);
                 res.redirect("/skaters/" + skater._id);
            }
         });
@@ -160,8 +160,8 @@ app.get("/skaters/:id/competitions/:competition_id/edit", function(req, res) {
       if(err){
             res.redirect("/skaters");
       } else {
-          console.log(foundCompetition);
-          console.log(foundCompetition.skater);
+          //console.log(foundCompetition);
+          //console.log(foundCompetition.skater);
         res.render("editCompetition", {competition: foundCompetition});          
       }
    }); 
@@ -193,46 +193,49 @@ app.delete("/skaters/:id/competitions/:competition_id", function(req, res){
 //RESULTS ROUTES
 
 //NEW Route - render the from to add new result to a paricular competition
-app.get("/skaters/:id/competitions/:competition_id/results/new", function(req, res) {
-    Competition.findById(req.params.competition_id, function(err, foundCompetition) {
-        if(err){
-            console.log(err);
-            res.redirect("back");
-        } else {
-            console.log(foundCompetition);
-            res.render("newResult", {competition: foundCompetition});
-        }
-    });
-});
+//app.get("/skaters/:id/competitions/:competition_id/results/new", function(req, res) {
+//    Competition.findById(req.params.competition_id, function(err, foundCompetition) {
+//        if(err){
+//            console.log(err);
+//            res.redirect("back");
+//        } else {
+//            //console.log(foundCompetition);
+//            res.render("newResult", {competition: foundCompetition});
+//        }
+//    });
+//});
 
 //CREATE Route - Create a new result 
-app.post("/skaters/:id/competitions/:competition_id/results", function(req, res) {
-   Competition.findById(req.params.competition_id, function(err, foundCompetition) {
-        if(err){
-            console.log(err);
-            res.redirect("back");
-        } else {
-            DistanceResult.create(req.body.distanceResult, function(err, distanceResult) {
-                if(err){
-                    console.log(err);
-                    res.redirect("back");
-                } else {
-                    distanceResult.skater = req.params.id;
-                    distanceResult.competition = req.params.competition_id;
-                    //save distanceResult
-                    distanceResult.save();
-                    foundCompetition.results.push(distanceResult);
-                    foundCompetition.save();
-                    console.log(foundCompetition);
-                    console.log(distanceResult);
-                    console.log(foundCompetition.skater);
-                    res.redirect("/skaters/" + foundCompetition.skater);
-                }
-                
-            });
-        }
-   }); 
-});
+//app.post("/skaters/:id/competitions/:competition_id/results", function(req, res) {
+//   Competition.findById(req.params.competition_id, function(err, foundCompetition) {
+//        if(err){
+//            console.log(err);
+//            res.redirect("back");
+//        } else {
+//            DistanceResult.create(req.body.distanceResult, function(err, distanceResult) {
+//                if(err){
+//                    
+//                    console.log(err);
+//                    res.redirect("back");
+//                } else {
+//                    distanceResult.skater = req.params.id;
+//                    distanceResult.competition = req.params.competition_id;
+//                    //save distanceResult
+//                    distanceResult.save();
+//                    console.log(req.body.distanceResult);
+//                    console.log(req.body.distanceResult.distance);
+//                    foundCompetition.results.push(distanceResult);
+//                    foundCompetition.save();
+//                    console.log(foundCompetition);
+//                    //console.log(distanceResult);
+//                    //console.log(foundCompetition.skater);
+//                    res.redirect("/skaters/" + foundCompetition.skater);
+//                }
+//                
+//            });
+//        }
+//   }); 
+//});
 
 
 

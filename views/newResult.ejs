@@ -5,7 +5,7 @@
     <div class="row">
         <h1 style="text-align: center">Add a Result to <%= competition.name %> Competition </h1>
         <div style="width: 30%; margin: 50px auto;">
-            <form action="/skaters/<%= competition.skater %>/competitions/<%= competition._id %>/results" method="POST">
+            <form class="text-center" action="/skaters/<%= competition.skater %>/competitions/<%= competition._id %>/results" method="POST">
                 <div class="form-group">
                     Skill Race:
                     <input class="form-control" type="text" name="distanceResult[skillrace]">

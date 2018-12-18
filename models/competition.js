@@ -11,12 +11,14 @@ var competitionSchema = new mongoose.Schema({
             ref : "Skater"
         }
         ],
-    results: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Results"
-        }
-        ]
+    
+    skillrace: String,
+    dist222m: String,
+    dist333m: String,
+    dist500m: String,
+    dist1000m: String,
+    dist1500m: String
+    
 });
 
 module.exports = mongoose.model("Competition", competitionSchema);
