@@ -16,6 +16,7 @@ var competitionSchema = new mongoose.Schema({
     dist222m: String,
     dist333m: String,
     dist500m: String,
+    dist777m: String,
     dist1000m: String,
     dist1500m: String
     

@@ -17,11 +17,11 @@
                                     <strong>
                                         <%= competition.name %>
                                     </strong>
-                                </p>    
-                                <p>
+                                <br>   
+                                
                                     Date: <%= competition.date %>
-                                </p>
-                                <p>
+                                <br>
+                                
                                     Location: <%= competition.location %>
                                 </p> 
                            
@@ -47,10 +47,93 @@
     <hr>
 </div>
 
+
 <div class="container">
-    <h3>The Chart goes here</h3>
-    <img src="https://www.excel-easy.com/examples/images/line-chart/line-chart.png">
+    <canvas id="lineChart" width="800" height="450"></canvas>
 </div>
+
+
+<script>
+var resultsChart = document.getElementById("lineChart"); 
+var lineChart = new Chart(resultsChart,{ 
+        type: "line",
+        data:  {
+            labels: [
+                <% skater.competitions.forEach(function(competition){ %>
+                 " <%= competition.name %>" , 
+                <% }); %>
+            ],
+            datasets: [{ 
+                data: [
+                     <% skater.competitions.forEach(function(competition){ %>
+                  <%= competition.skillrace %> , 
+                <% }); %>
+                    ],
+                label: "Skill Race",
+                borderColor: "pink",
+                fill: false
+              }, { 
+                data: [
+                     <% skater.competitions.forEach(function(competition){ %>
+                  <%= competition.dist222m %> , 
+                <% }); %>
+                    ],
+                label: "222m",
+                borderColor: "yellow",
+                fill: false
+              }, { 
+                data: [
+                     <% skater.competitions.forEach(function(competition){ %>
+                  <%= competition.dist333m %> , 
+                <% }); %>
+                    ],
+                label: "333m",
+                borderColor: "green",
+                fill: false
+              }, { 
+                data: [
+                     <% skater.competitions.forEach(function(competition){ %>
+                  <%= competition.dist500m %> , 
+                <% }); %>
+                    ],
+                label: "500m",
+                borderColor: "black",
+                fill: false
+              }, { 
+                data: [
+                     <% skater.competitions.forEach(function(competition){ %>
+                  <%= competition.dist777m %> , 
+                <% }); %>
+                    ],
+                label: "777m",
+                borderColor: "orange",
+                fill: false
+              }, { 
+                data: [
+                     <% skater.competitions.forEach(function(competition){ %>
+                  <%= competition.dist1000m %> , 
+                <% }); %>
+                    ],
+                label: "1000m",
+                borderColor: "blue",
+                fill: false
+              }, { 
+                data: [
+                     <% skater.competitions.forEach(function(competition){ %>
+                  <%= competition.dist1500m %> , 
+                <% }); %>
+                    ],
+                label: "1500m",
+                borderColor: "red",
+                fill: false
+              }
+            ]
+          },
+   }); 
+
+</script>
+
+<hr>
 
 
 <% include partials/footer %>

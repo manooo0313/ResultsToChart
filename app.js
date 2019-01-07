@@ -5,6 +5,7 @@ var methodOverride  = require('method-override');
 var bodyParser      = require("body-parser");
 var Skater          = require("./models/skater");
 var Competition     = require("./models/competition");
+//var Chart           = require('chart.js');
 //var DistanceResult  = require("./models/distanceResult"); 
 
 
