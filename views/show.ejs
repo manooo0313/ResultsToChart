@@ -18,7 +18,15 @@
                                         <%= competition.name %>
                                     </strong>
                                 <br>   
-                                    Date: <%= competition.date %>
+                                    Date:  
+                                   <% var d = competition.date.getDate();%>
+                                <%    var m = competition.date.getMonth();%>
+                                   <% var y = competition.date.getFullYear(); %>
+                              <%     var dateWithoutTime = (d + ". " + (m+1) + ". " + y + ".");%>
+                                    
+                                  <%= dateWithoutTime;%>
+
+                                
                                 <br>
                                     Location: <%= competition.location %>
                                 </p> 
@@ -131,6 +139,11 @@ var lineChart = new Chart(resultsChart,{
                     ticks: {
                         beginAtZero: false,
                         stepSize: 10000
+                    }
+                }], 
+                xAxes: [{
+                    ticks: {
+                        autoSkip: false
                     }
                 }]
             },
